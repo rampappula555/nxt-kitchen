@@ -30,7 +30,7 @@ const FoodItemDetails = () => {
         options
       );
       const fetchedData = await response.json();
-
+      console.log(response);
       if (response.ok) {
         const updatedRestaurantDetails = {
           rating: fetchedData.rating,

@@ -155,7 +155,7 @@ const Home = () => {
 
   const getRestaurantSuccessview = () => {
     return (
-      <div>
+      <div className="restaurant-details-container">
         {restaurantList.length === 0 ? (
           <h1>No Restaurants found</h1>
         ) : (
@@ -163,8 +163,14 @@ const Home = () => {
             const { name, id, imageUrl } = eachRestaurant;
             return (
               <div key={id}>
-                <Link to={`/food-item/${id}`} target="_blank">
-                  <img src={imageUrl} alt="img" className="img" />
+                <Link to={`/food-item/${id}`}>
+                  <div className="home-page-restaurant-images-container">
+                    <img
+                      src={imageUrl}
+                      alt="img"
+                      className="home-page-restaurant-images"
+                    />
+                  </div>
                 </Link>
                 <p>{name}</p>
               </div>
@@ -205,37 +211,45 @@ const Home = () => {
         <div>
           {getOffersView()}
           <div className="home-page-heading-and-sortby-options-container">
-            <div>
-              <p className="home-page-heading">Popular Restaurants</p>
-              <p className="home-page-text">
-                Select Your favourite restaurant special dish and make your day
-                happy...
-              </p>
-            </div>
-            <div>
-              <select onChange={onChangeSortbyOptions} value={sortBy}>
-                {sortByOptions.map((eachOption) => (
-                  <option key={eachOption.id} value={eachOption.id}>
-                    {eachOption.displayText}
-                  </option>
-                ))}
-              </select>
+            <div className="a">
+              <div>
+                <p className="home-page-heading">Popular Restaurants</p>
+                <p className="home-page-text">
+                  Select Your favourite restaurant special dish and make your
+                  day happy...
+                </p>
+              </div>
+              <div>
+                <select onChange={onChangeSortbyOptions} value={sortBy}>
+                  {sortByOptions.map((eachOption) => (
+                    <option key={eachOption.id} value={eachOption.id}>
+                      {eachOption.displayText}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
           <div className="horizontal-line-container">
             <hr />
           </div>
-          <input
-            type="search"
-            value={usersSearch}
-            onChange={onChangeUsersSearch}
-          />
-          <button onClick={onClickSearchButton}>search</button>
+          <div className="home-page-search-container">
+            <input
+              type="search"
+              value={usersSearch}
+              onChange={onChangeUsersSearch}
+            />
+            <button onClick={onClickSearchButton}>search</button>
+          </div>
           <div>{getRestaurantsView()}</div>
           <div className="homepage-button-container">
-            <button onClick={onClickDecrement}>d</button>
+            {activePageCount > 1 && (
+              <button onClick={onClickDecrement}>d</button>
+            )}
             <p>{activePageCount}</p>
-            <button onClick={onClickIncrement}>i</button>
+            {activePageCount !== 4 && (
+              <button onClick={onClickIncrement}>i</button>
+            )}
           </div>
         </div>
       )}

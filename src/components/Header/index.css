@@ -4,15 +4,15 @@
 .cart-link {
   margin-left: 8px;
   margin-right: 8px;
+  cursor: pointer;
 }
 .header-background-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 30px;
-  padding-right: 30px;
   height: 150px;
   margin-top: 0;
+  padding-right: 5px;
 }
 .header-logo-and-heading-container {
   display: flex;

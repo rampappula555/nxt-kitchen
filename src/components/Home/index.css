@@ -1,3 +1,32 @@
+body {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.home-page-restaurant-images {
+  width: 250px;
+  border-radius: 30px;
+}
+.home-page-restaurant-images-container {
+  width: 250px;
+}
+.restaurant-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.home-page-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
 .homepage-loader {
   text-align: center;
 }
@@ -20,14 +49,18 @@
 .carousel-images {
   height: 100%;
   width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 .carousel-images-container {
   margin: auto;
   height: 250px;
 }
-.home-main-container {
+/* .home-main-container {
   width: 100vw;
-}
+} */
 .home-page-heading {
   height: 48px;
   width: 313px;

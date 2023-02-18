@@ -19,7 +19,9 @@ const Header = () => {
       <div className="header-buttons-container">
         <p>Home</p>
 
-        <p className="cart-link">Cart</p>
+        <p className="cart-link" onClick={() => navigate("/cart")}>
+          Cart
+        </p>
         <button onClick={onClickLogout}>logout</button>
       </div>
     </div>

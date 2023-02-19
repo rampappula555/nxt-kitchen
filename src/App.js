@@ -57,15 +57,17 @@ const App = () => {
       }
     });
   };
-  const deleteCartItem = () => {};
-
+  const onClickDelete = (id) => {
+    const deletedcartList = cartList.filter((eachItem) => eachItem.id !== id);
+    setCartList(deletedcartList);
+  };
   useEffect(() => {
     sessionStorage.setItem("cartList", JSON.stringify(cartList));
   }, [cartList]);
 
   return (
     <BrowserRouter>
-      <CartContext.Provider value={{ cartList, addTocart, deleteCartItem }}>
+      <CartContext.Provider value={{ cartList, addTocart, onClickDelete }}>
         <Routes>
           <Route path="/login" element={<LoginForm />} />
 

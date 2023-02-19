@@ -2,6 +2,127 @@ body {
   padding-left: 50px;
   padding-right: 50px;
 }
+.home-page-restaurant-details-container {
+  display: flex;
+  align-items: center;
+}
+.rating-icon-container {
+  width: 10px;
+  margin-right: 6px;
+}
+.failed-view-text {
+  text-align: center;
+}
+.homepage-restaurant-heading-text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  /* identical to box height, or 133% */
+
+  letter-spacing: 0.2px;
+
+  /* Light / blue-gray / 700 */
+  color: #334155;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.homepage-rating-and-reviews-text {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.homepage-cuisine-text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  margin-top: 0;
+  margin-bottom: 0;
+  /* identical to box height, or 171% */
+
+  /* Light / blue-gray / 500 */
+
+  color: #64748b;
+}
+.homepage-rating-text {
+  width: 22px;
+
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+
+  /* Light / blue-gray / 900 */
+
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.homepage-reviews-text {
+  width: 71px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  /* Light / blue-gray / 500 */
+
+  color: #64748b;
+}
+.loading-spinner-container {
+  padding-top: 100px;
+  padding-bottom: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-restaurants-found-text-container {
+  text-align: center;
+  width: 1350px;
+}
+.active-page-count-button {
+  background-color: #e5e5e5;
+  padding: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 0;
+}
+.sortby-options-container {
+  display: flex;
+  align-items: center;
+}
+.sortby-option-icon-container {
+  padding-top: 3px;
+  padding-right: 5px;
+}
+.active-page-count-text {
+  width: 57px;
+  height: 27px;
+
+  font-family: "Bree Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  text-align: center;
+
+  /* Light / blue-gray / 700 */
+
+  color: #334155;
+}
 .a {
   display: flex;
   align-items: center;
@@ -9,17 +130,23 @@ body {
   width: 100%;
 }
 .home-page-restaurant-images {
-  width: 250px;
-  border-radius: 30px;
+  height: 100px;
+  width: 160px;
+
+  border-radius: 8px;
 }
 .home-page-restaurant-images-container {
-  width: 250px;
+  height: 100px;
+  width: 160px;
+  margin-right: 25px;
+  border-radius: 8px;
 }
 .restaurant-details-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row-gap: 40px;
+  padding-left: 35px;
+  margin-top: 50px;
 }
 .home-page-search-container {
   display: flex;

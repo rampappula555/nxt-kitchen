@@ -8,6 +8,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useCallback } from "react";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
+import { MdSort } from "react-icons/md";
+import {
+  AiOutlineStar,
+  AiFillBackward,
+  AiOutlineForward,
+} from "react-icons/ai";
+import Footer from "../Footer";
 const apiStatusConstants = {
   initial: "INITIAL",
   progress: "PROGRESS",
@@ -82,6 +90,19 @@ const Home = () => {
         id: eachRestaurant.id,
         name: eachRestaurant.name,
         imageUrl: eachRestaurant.image_url,
+        costForTwo: eachRestaurant.cost_for_two,
+        cuisine: eachRestaurant.cuisine,
+        groupByTime: eachRestaurant.group_by_time,
+        hasOnlineDelivery: eachRestaurant.has_online_delivery,
+        hasTableBooking: eachRestaurant.has_table_booking,
+        isDeliveringNow: eachRestaurant.is_delivering_now,
+        location: eachRestaurant.location,
+        menuType: eachRestaurant.menu_type,
+        opensAt: eachRestaurant.opens_at,
+        rating: eachRestaurant.user_rating.rating,
+        ratingColor: eachRestaurant.user_rating.rating_color,
+        ratingText: eachRestaurant.user_rating.rating_text,
+        totalReviews: eachRestaurant.user_rating.total_reviews,
       }));
       setRestaurantsList(updatedData);
       setRestaurantApiStatus(apiStatusConstants.success);
@@ -157,22 +178,56 @@ const Home = () => {
     return (
       <div className="restaurant-details-container">
         {restaurantList.length === 0 ? (
-          <h1>No Restaurants found</h1>
+          <div className="no-restaurants-found-text-container">
+            <h1 className="failed-view-text">No Restaurants found</h1>
+          </div>
         ) : (
           restaurantList.map((eachRestaurant) => {
-            const { name, id, imageUrl } = eachRestaurant;
+            const {
+              name,
+              id,
+              imageUrl,
+              costForTwo,
+              cuisine,
+              groupByTime,
+              hasOnlineDelivery,
+              hasTableBooking,
+              isDeliveringNow,
+              location,
+              menuType,
+              opensAt,
+              rating,
+              ratingColor,
+              ratingText,
+              totalReviews,
+            } = eachRestaurant;
             return (
-              <div key={id}>
-                <Link to={`/food-item/${id}`}>
-                  <div className="home-page-restaurant-images-container">
+              <div key={id} className="home-page-restaurant-details-container">
+                <div className="home-page-restaurant-images-container">
+                  <Link to={`/food-item/${id}`}>
                     <img
                       src={imageUrl}
                       alt="img"
                       className="home-page-restaurant-images"
                     />
-                  </div>
-                </Link>
-                <p>{name}</p>
+                  </Link>
+                </div>
+                <div>
+                  <p className="homepage-restaurant-heading-text">{name}</p>
+                  <p className="homepage-cuisine-text">{cuisine}</p>
+                  <p className="homepage-rating-and-reviews-text">
+                    <span className="homepage-rating-text">
+                      <span className="rating-icon-container">
+                        <AiOutlineStar />
+                      </span>
+
+                      {rating}
+                    </span>
+                    <span className="homepage-reviews-text">
+                      ({totalReviews} reviews)
+                    </span>
+                  </p>
+                </div>
               </div>
             );
           })
@@ -187,7 +242,7 @@ const Home = () => {
       case apiStatusConstants.success:
         return getRestaurantSuccessview();
       case apiStatusConstants.failure:
-        return <h1>FAILED</h1>;
+        return <h1 className="failed-view-text">NO RESTAURANTS FOUND</h1>;
       default:
         return null;
     }
@@ -206,7 +261,18 @@ const Home = () => {
     <div className="home-main-container">
       <Header />
       {!isLoading ? (
-        <h1 className="homepage-loader">LOADING</h1>
+        <div className="loading-spinner-container">
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="#F7931E"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+        </div>
       ) : (
         <div>
           {getOffersView()}
@@ -219,7 +285,10 @@ const Home = () => {
                   day happy...
                 </p>
               </div>
-              <div>
+              <div className="sortby-options-container">
+                <div className="sortby-option-icon-container">
+                  <MdSort />
+                </div>
                 <select onChange={onChangeSortbyOptions} value={sortBy}>
                   {sortByOptions.map((eachOption) => (
                     <option key={eachOption.id} value={eachOption.id}>
@@ -244,15 +313,28 @@ const Home = () => {
           <div>{getRestaurantsView()}</div>
           <div className="homepage-button-container">
             {activePageCount > 1 && (
-              <button onClick={onClickDecrement}>d</button>
+              <button
+                className="active-page-count-button"
+                onClick={onClickDecrement}
+              >
+                <AiFillBackward />
+              </button>
             )}
-            <p>{activePageCount}</p>
+            <p className="active-page-count-text">{activePageCount}</p>
             {activePageCount !== 4 && (
-              <button onClick={onClickIncrement}>i</button>
+              <button
+                className="active-page-count-button"
+                onClick={onClickIncrement}
+              >
+                <AiOutlineForward />
+              </button>
             )}
           </div>
         </div>
       )}
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };

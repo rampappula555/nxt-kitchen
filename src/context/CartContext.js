@@ -3,6 +3,6 @@ const CartContext = React.createContext({
   cartList: [],
   updatedArray: [],
   addTocart: () => {},
-  deleteCartItem: () => {},
+  onClickDelete: () => {},
 });
 export default CartContext;

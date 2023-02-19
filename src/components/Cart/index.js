@@ -2,22 +2,80 @@ import "./index.css";
 import CartContext from "../../context/CartContext";
 import { useContext } from "react";
 import Header from "../Header";
+import { useNavigate } from "react-router";
 const Cart = () => {
+  const navigate = useNavigate();
   const value = useContext(CartContext);
-  const { cartList } = value;
+  const { cartList, onClickDelete } = value;
   return (
     <div>
       <div>
         <Header />
       </div>
-      {cartList.map((eachItem) => {
-        return (
-          <div key={eachItem.id}>
-            <img src={eachItem.imageUrl} alt="img" className="img" />
-            <p>{eachItem.quantity}</p>
+      <div>
+        {cartList.length > 0 ? (
+          <div>
+            {cartList.map((eachItem) => {
+              const { imageUrl, name, quantity, cost, id } = eachItem;
+
+              return (
+                <div className="cartlist-item-main-container" key={id}>
+                  <div className="cartlist-view-image-container">
+                    <img
+                      src={imageUrl}
+                      alt="img"
+                      className="cartlist-view-image"
+                    />
+                  </div>
+                  <div className="title-and-brand-text-container">
+                    <h3>{name}</h3>
+                  </div>
+                  <div className="cartlistitem-buttons-container">
+                    <button>-</button>
+                    <p>{quantity}</p>
+                    <button>+</button>
+                  </div>
+
+                  <div className="cartlistitem-price-container">
+                    <p>{cost}</p>
+                  </div>
+                  <div className="delete-item-button-container">
+                    <button
+                      onClick={() => {
+                        onClickDelete(id);
+                      }}
+                    >
+                      Delete Item
+                    </button>
+                  </div>
+                  <p>Total {cost * quantity}</p>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
+        ) : (
+          <div className="empty-cart-list-main-container">
+            <div>
+              <img
+                src="https://res.cloudinary.com/dndtkpqk5/image/upload/v1664614760/OBJECTS_obsuby.png"
+                alt="img"
+              />
+            </div>
+            <p className="no-orders-yet-text">No Orders Yet!</p>
+            <p className="no-order-text-details">
+              Your cart is empty. Add something from the menu.
+            </p>
+            <button
+              className="order-now-button"
+              onClick={() => {
+                navigate("/", { replace: true });
+              }}
+            >
+              Order Now
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

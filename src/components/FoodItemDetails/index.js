@@ -4,6 +4,10 @@ import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import Header from "../Header";
 import FoodItem from "../FoodItem";
+import { AiOutlineStar } from "react-icons/ai";
+import { ThreeDots } from "react-loader-spinner";
+import Footer from "../Footer";
+
 const apiStatusConstants = {
   initial: "INITIAL",
   progress: "PROGRESS",
@@ -14,6 +18,7 @@ const FoodItemDetails = () => {
   const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
   const [restaurantDetails, setRestaurantDetails] = useState({});
   const [foodMenu, setFoodMenu] = useState([]);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     const getFoodItemsDetailView = async () => {
@@ -30,9 +35,14 @@ const FoodItemDetails = () => {
         options
       );
       const fetchedData = await response.json();
-      console.log(response);
       if (response.ok) {
         const updatedRestaurantDetails = {
+          costForTwo: fetchedData.cost_for_two,
+          cuisine: fetchedData.cuisine,
+          itemsCount: fetchedData.items_count,
+          location: fetchedData.location,
+          opensAt: fetchedData.opens_at,
+          reviewsCount: fetchedData.reviews_count,
           rating: fetchedData.rating,
           id: fetchedData.id,
           imageUrl: fetchedData.image_url,
@@ -43,6 +53,8 @@ const FoodItemDetails = () => {
           imageUrl: eachFoodItem.image_url,
           cost: eachFoodItem.cost,
           name: eachFoodItem.name,
+          rating: eachFoodItem.rating,
+          foodType: eachFoodItem.food_type,
         }));
         setRestaurantDetails(updatedRestaurantDetails);
         setFoodMenu(updatedFoodMenu);
@@ -53,14 +65,50 @@ const FoodItemDetails = () => {
   }, [id]);
 
   const getSuccessView = () => {
-    const { name, imageUrl, rating } = restaurantDetails;
+    const {
+      name,
+      imageUrl,
+      rating,
+      cuisine,
+      location,
+      reviewsCount,
+      costForTwo,
+    } = restaurantDetails;
     return (
       <div>
-        <img src={imageUrl} alt="img" />
-        <p>{rating}</p>
-        <p>{name}</p>
-        <hr />
-        <div>
+        <div className="food-item-details-background-container">
+          <div className="restaurant-details-image-container">
+            <img src={imageUrl} alt="img" className="restaurant-image" />
+          </div>
+
+          <div className="restaurant-details-details-text-container">
+            <p className="restaurant-details-heading-text">{name}</p>
+            <p className="restaurant-details-cuisine-text">{cuisine}</p>
+            <p className="restaurant-details-location-text">{location}</p>
+            <div className="restaurant-details-price-and-rating-container">
+              <div>
+                <div className="restaurant-details-rating-container">
+                  <div className="restaurant-details-rating-icon-container">
+                    <AiOutlineStar />
+                  </div>
+                  <p className="restaurant-details-rating-text">{rating}</p>
+                </div>
+                <p className="restaurant-details-reviews-text">
+                  {reviewsCount} Reviews
+                </p>
+              </div>
+              <div className="restaurant-details-price-text-container">
+                <p className="restaurant-details-price-text">
+                  price:{costForTwo}
+                </p>
+                <p className="restaurant-details-costfortwo-text">
+                  Cost for two
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="each-food-item-bg-container">
           {foodMenu.map((eachFoodItem) => (
             <FoodItem key={eachFoodItem.id} eachFoodItem={eachFoodItem} />
           ))}
@@ -68,11 +116,24 @@ const FoodItemDetails = () => {
       </div>
     );
   };
-
+  const getLoadingView = () => (
+    <div className="loading-spinner-container">
+      <ThreeDots
+        height="80"
+        width="80"
+        radius="9"
+        color="#F7931E"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    </div>
+  );
   const getMenu = () => {
     switch (apiStatus) {
       case apiStatusConstants.progress:
-        return <h1>LOADING</h1>;
+        return getLoadingView();
       case apiStatusConstants.success:
         return getSuccessView();
       case apiStatusConstants.failure:
@@ -81,10 +142,35 @@ const FoodItemDetails = () => {
         return null;
     }
   };
+  const onClickScrollButton = () => {
+    if (window.scrollY > 400) {
+      window.scrollTo(0, 0);
+    } else {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  };
+  useEffect(() => {
+    const handler = () => {
+      if (window.scrollY > 400) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handler);
+  }, []);
   return (
     <div>
       <Header />
       <div>{getMenu()}</div>
+      <div>
+        <Footer />
+      </div>
+      <div className="up-and-down-button-container">
+        <button onClick={onClickScrollButton}>
+          {isScrolled ? "go to top" : "go to bottom"}
+        </button>
+      </div>
     </div>
   );
 };

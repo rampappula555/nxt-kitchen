@@ -57,6 +57,9 @@ const App = () => {
       }
     });
   };
+  const deletecartList = () => {
+    setCartList([]);
+  };
   const onClickDelete = (id) => {
     const deletedcartList = cartList.filter((eachItem) => eachItem.id !== id);
     setCartList(deletedcartList);
@@ -67,7 +70,9 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <CartContext.Provider value={{ cartList, addTocart, onClickDelete }}>
+      <CartContext.Provider
+        value={{ cartList, addTocart, onClickDelete, deletecartList }}
+      >
         <Routes>
           <Route path="/login" element={<LoginForm />} />
 

@@ -3,6 +3,7 @@ import CartContext from "../../context/CartContext";
 import { useContext } from "react";
 import Header from "../Header";
 import { useNavigate } from "react-router";
+import CartSummary from "../CartSummary";
 const Cart = () => {
   const navigate = useNavigate();
   const value = useContext(CartContext);
@@ -52,6 +53,9 @@ const Cart = () => {
                 </div>
               );
             })}
+            <div>
+              <CartSummary />
+            </div>
           </div>
         ) : (
           <div className="empty-cart-list-main-container">

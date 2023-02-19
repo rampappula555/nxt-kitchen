@@ -49,6 +49,7 @@ const LoginForm = () => {
           <img
             src="https://res.cloudinary.com/dndtkpqk5/image/upload/v1664029743/Group_7420_r0ezka.svg"
             alt="img"
+            className="login-form-logo"
           />
           <p className="tasty-kitchen-heading">Tasty Kitchen</p>
           <p className="login-text">Login</p>

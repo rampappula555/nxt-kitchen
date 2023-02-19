@@ -158,6 +158,9 @@ const FoodItemDetails = () => {
       }
     };
     window.addEventListener("scroll", handler);
+    return () => {
+      window.removeEventListener("scroll", handler);
+    };
   }, []);
   return (
     <div>

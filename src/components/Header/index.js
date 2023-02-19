@@ -1,10 +1,11 @@
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import "./index.css";
 const Header = () => {
   const navigate = useNavigate();
+  const logOutRef = useRef(null);
   const [isLogOut, setIsLogOut] = useState(false);
   const onClickLogout = () => {
     setIsLogOut(true);
@@ -21,6 +22,17 @@ const Header = () => {
       body.style.overflow = "initial";
     }
   }, [isLogOut]);
+  useEffect(() => {
+    const handler = (event) => {
+      if (logOutRef.current && !logOutRef.current.contains(event.target)) {
+        setIsLogOut(false);
+      }
+    };
+    window.addEventListener("mousedown", handler);
+    return () => {
+      window.removeEventListener("mousedown", handler);
+    };
+  }, []);
   return (
     <div className="header-background-container">
       <div className="header-logo-and-heading-container">
@@ -48,10 +60,12 @@ const Header = () => {
         </div>
         {isLogOut && (
           <div className="logout-popup-container">
-            <div>
+            <div className="logout-popup-container-two" ref={logOutRef}>
               <p>Are you sure to want to exit</p>
               <div>
-                <button onClick={onclickYes}>Yes</button>
+                <button onClick={onclickYes} autoFocus>
+                  Yes
+                </button>
                 <button
                   onClick={() => {
                     setIsLogOut(false);

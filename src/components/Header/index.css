@@ -15,6 +15,25 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: rgba(240, 248, 255, 0.505);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logout-popup-container-two {
+  width: 300px;
+  background-color: #f7931e;
+  height: 130px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 15px;
 }
 .home-navlink {
   height: 26px;

@@ -24,6 +24,9 @@
   align-items: center;
   justify-content: center;
 }
+.yes-button {
+  margin-right: 5px;
+}
 .logout-popup-container-two {
   width: 300px;
   background-color: #f7931e;

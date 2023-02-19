@@ -67,11 +67,37 @@ const App = () => {
   useEffect(() => {
     sessionStorage.setItem("cartList", JSON.stringify(cartList));
   }, [cartList]);
-
+  const onClickDecrease = (id) => {
+    const decreasedResult = cartList.map((eachItem) => {
+      if (eachItem.id === id) {
+        if (eachItem.quantity > 1) {
+          return { ...eachItem, quantity: eachItem.quantity - 1 };
+        }
+      }
+      return eachItem;
+    });
+    setCartList(decreasedResult);
+  };
+  const onClickIncrease = (id) => {
+    const decreasedResult = cartList.map((eachItem) => {
+      if (eachItem.id === id) {
+        return { ...eachItem, quantity: eachItem.quantity + 1 };
+      }
+      return eachItem;
+    });
+    setCartList(decreasedResult);
+  };
   return (
     <BrowserRouter>
       <CartContext.Provider
-        value={{ cartList, addTocart, onClickDelete, deletecartList }}
+        value={{
+          cartList,
+          addTocart,
+          onClickDelete,
+          deletecartList,
+          onClickIncrease,
+          onClickDecrease,
+        }}
       >
         <Routes>
           <Route path="/login" element={<LoginForm />} />

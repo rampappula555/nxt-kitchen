@@ -63,7 +63,7 @@ const Header = () => {
             <div className="logout-popup-container-two" ref={logOutRef}>
               <p>Are you sure to want to exit</p>
               <div>
-                <button onClick={onclickYes} autoFocus>
+                <button onClick={onclickYes} autoFocus className="yes-button">
                   Yes
                 </button>
                 <button

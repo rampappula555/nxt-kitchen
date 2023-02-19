@@ -6,8 +6,8 @@ import { Navigate, useNavigate } from "react-router";
 const LoginForm = () => {
   const navigate = useNavigate();
   const usernameRef = useRef(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("rahul");
+  const [password, setPassword] = useState("rahul@2021");
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorMessage, setShowErrorMessage] = useState(false);

@@ -7,7 +7,7 @@ import CartSummary from "../CartSummary";
 const Cart = () => {
   const navigate = useNavigate();
   const value = useContext(CartContext);
-  const { cartList, onClickDelete } = value;
+  const { cartList, onClickDelete, onClickDecrease, onClickIncrease } = value;
   return (
     <div>
       <div>
@@ -32,9 +32,21 @@ const Cart = () => {
                     <h3>{name}</h3>
                   </div>
                   <div className="cartlistitem-buttons-container">
-                    <button>-</button>
+                    <button
+                      onClick={() => {
+                        onClickDecrease(id);
+                      }}
+                    >
+                      -
+                    </button>
                     <p>{quantity}</p>
-                    <button>+</button>
+                    <button
+                      onClick={() => {
+                        onClickIncrease(id);
+                      }}
+                    >
+                      +
+                    </button>
                   </div>
 
                   <div className="cartlistitem-price-container">
